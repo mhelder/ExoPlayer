@@ -14,6 +14,7 @@
 
 apply from: "$gradle.ext.exoplayerSettingsDir/constants.gradle"
 apply plugin: 'com.android.library'
+apply plugin: 'digital.wup.android-maven-publish'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -31,4 +32,9 @@ android {
     }
 
     testOptions.unitTests.includeAndroidResources = true
+    task sourcesJar(type: Jar) {
+        from android.sourceSets.main.java.srcDirs
+        classifier = 'sources'
+    }
+    artifacts { archives sourcesJar }
 }
