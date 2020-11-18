@@ -1378,5 +1378,12 @@ public final class MediaSessionConnector {
                   player, controlDispatcher, mediaButtonEvent);
       return isHandled || super.onMediaButtonEvent(mediaButtonEvent);
     }
+
+    @Override
+    public void onSetPlaybackSpeed(float speed) {
+      Player player = Assertions.checkNotNull(MediaSessionConnector.this.player);
+      float playbackPitch = player.getPlaybackParameters().pitch;
+      player.setPlaybackParameters(new PlaybackParameters(speed, playbackPitch));
+    }
   }
 }
